@@ -1,0 +1,90 @@
+call pathogen#infect()
+
+syntax enable
+set number                      " activate line numbers
+if has('gui_running')
+	set guifont=Menlo:h14
+	set guioptions-=T
+	let g:solarized_bold=0    "default value is 1
+	let g:solarized_contrast="high"    "default value is normal
+	let g:solarized_visibility="low"    "default value is normal
+	set go+=b  " activate bottom scroll always
+	syntax enable
+	set background=light
+	colorscheme solarized
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+	" for rvm.vim
+	set statusline+=%{rvm#statusline()}
+
+	" for sweet-rspec-vim
+	set macmeta
+	map <D-r> :SweetVimRspecRunFile<CR>
+	map <D-R> :SweetVimRspecRunFocused<CR>
+	map <M-D-r> :SweetVimRspecRunPrevious<CR>
+	let $SWEET_VIM_RSPEC_SHOW_PASSING="true"
+endif
+
+" show invisible characters
+set list
+
+" shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+
+" clear search highlight
+nnoremap <F3> :set hlsearch!<CR>
+
+set rtp+=/usr/local/go/misc/vim
+
+set nocompatible                " choose no compatibility with legacy vi
+set encoding=utf-8
+set showcmd                     " display incomplete commands
+filetype plugin indent on       " load file type plugins + indentation
+
+"" Whitespace
+set nowrap                      " don't wrap lines
+set tabstop=4 shiftwidth=4      " a tab is two spaces (or set this to 4)
+set noexpandtab                 " use tabs (optional)
+set backspace=indent,eol,start  " backspace through everything in insert mode
+
+"" Searching
+set hlsearch                    " highlight matches
+set incsearch                   " incremental searching
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter
+
+""" Move between splits
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+""" CtrlP
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_cmd = 'CtrlPMixed'
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*   " for Linux/MacOSX
+
+
+""" Move backup and swap to tmp
+set directory=/tmp
+set backupdir=/tmp
+
+""" PHP specific abbreviations
+""" abbr t $this->
+""" abbr php <?php ?>
+""" abbr model Model::factory('
+
+""" Markdown abbreviations
+""" abbr á &aacute;
+""" abbr é &eacute;
+""" abbr í &iacute;
+""" abbr ó &oacute;
+""" abbr ú &uacute;
+""" abbr ñ &ntilde;
+""" abbr Ñ &Ntilde;
+
+" PHP parser check (CTRL-L)
+autocmd FileType php noremap <C-L> :!$HOME/bin/php -l %<CR>
