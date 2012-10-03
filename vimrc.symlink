@@ -3,7 +3,7 @@ call pathogen#infect()
 syntax enable
 set number                      " activate line numbers
 if has('gui_running')
-	set guifont=Menlo:h14
+	set guifont=Source\ Code\ Pro\ Semibold:h14
 	set guioptions-=T
 	let g:solarized_bold=0    "default value is 1
 	let g:solarized_contrast="high"    "default value is normal
@@ -12,6 +12,7 @@ if has('gui_running')
 	syntax enable
 	set background=light
 	colorscheme solarized
+	set t_Co=256
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
@@ -88,3 +89,5 @@ set backupdir=/tmp
 
 " PHP parser check (CTRL-L)
 autocmd FileType php noremap <C-L> :!$HOME/bin/php -l %<CR>
+
+let g:DeleteTrailingWhitespace = 0
