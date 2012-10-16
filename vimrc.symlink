@@ -34,8 +34,11 @@ set list
 " shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
+" Alternate buffers
+map <C-n> :bNext<CR>
+
 " clear search highlight
-nnoremap <F3> :set hlsearch!<CR>
+map <C-g> :set hlsearch!<CR>
 
 set rtp+=/usr/local/go/misc/vim
 
@@ -63,6 +66,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+map <C-b> :bd<CR>
 """ CtrlP
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_cmd = 'CtrlPMixed'
