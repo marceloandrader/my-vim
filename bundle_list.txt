@@ -1,5 +1,3 @@
-.
-..
 DeleteTrailingWhitespace
 VimClojure
 cocoa.vim
@@ -30,3 +28,4 @@ vim-ruby
 vim-surround
 web-indent
 xmledit
+zencoding-vim
