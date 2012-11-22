@@ -14,8 +14,11 @@ if has('gui_running')
 	colorscheme solarized
 	set t_Co=256
 
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
+	" Use the same symbols as TextMate for tabstops and EOLs
+	set listchars=tab:▸\ ,eol:¬
+
+	" show invisible characters
+	set list
 
 	" for rvm.vim
 	set statusline+=%{rvm#statusline()}
@@ -28,8 +31,6 @@ set listchars=tab:▸\ ,eol:¬
 	let $SWEET_VIM_RSPEC_SHOW_PASSING="true"
 endif
 
-" show invisible characters
-set list
 
 " shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
