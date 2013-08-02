@@ -1,0 +1,45 @@
+snippet defp
+	define(function(require) {
+	  'use strict';
+	  
+	  var ko = require('knockout'),
+	  ${1:ViewModelClass} = require('app/viewmodel/${2:fileName}'),
+	  showPage = require('app/functions/showpage');
+
+	  var page = new $1();
+	  ko.applyBindings(page);
+	  window.page = page;
+
+	  showPage();
+	});
+	
+snippet def
+	define(function(require) {
+	  'use strict';
+	  var ko = require('knockout');
+
+	  return function(data) {
+	    var self = this;
+	    ${1}
+	  };
+	});
+
+snippet ob
+	self.${1:varName} = ko.observable(data.${2:fromJSON} || ${3:initialValue});${4}
+	
+snippet oa
+	self.${1:varName} = ko.observableArray([]);${2}
+
+snippet afe
+	ko.utils.arrayForEach(${1:array} || [], function(${2:itemName}) {
+	  ${3}
+	});
+
+snippet req
+	${1:varName} = require('${2:directory}/$1'),${3}
+
+snippet koc
+	self.${1:computedVar} = ko.computed(function() {
+	  ${2}
+	});
+	
