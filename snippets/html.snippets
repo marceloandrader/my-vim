@@ -1,0 +1,29 @@
+snippet pselect-backend
+	{{#power-select
+		search=(action 'search${1:name}')
+		selected=${2:selectedItem}
+		onchange=(action (mut $2))
+		as |result search|
+		}}
+		{{highlight-result result.${3:fullName} query=search}}
+	{{/power-select}}
+
+snippet pselect-multiple-backend
+	{{#power-select-multiple
+		search=(action 'search${1:name}')
+		selected=${2:selectedItems}
+		onchange=(action (mut $2))
+		as |result search|
+		}}
+		{{highlight-result result.${3:fullName} query=search}}
+	{{/power-select-multiple}}
+
+snippet pselect-static
+	{{#power-select
+		options=${1:options}
+		selected=${2:selectedItem}
+		onchange=(action (mut $2))
+		as |result search|
+		}}
+		{{highlight-result result.${3:fullName} query=search}}
+	{{/power-select}}

@@ -43,3 +43,18 @@ snippet koc
 	  ${2}
 	});
 	
+snippet search
+		/** power-select for $2 */
+		search${1:Name}: function (term) {
+			return new Ember.RSVP.Promise((resolve, reject) => {
+				Ember.run.debounce(this, this._performSearch$1, term, resolve, reject, 600);
+			});
+		}
+	},
+	_performSearch$1(term, resolve, reject) {
+		return this.store.query('${2:client}', {
+			'first_name||last_name': '*' + term + '*',
+			limit: 100,
+			sortField: 'last_name'
+			}).then( (items) => resolve(items) );
+	}
