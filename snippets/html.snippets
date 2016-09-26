@@ -1,6 +1,7 @@
 snippet pselect-backend
 	{{#power-select
 		search=(action 'search${1:name}')
+		searchEnabled=true
 		selected=${2:selectedItem}
 		onchange=(action (mut $2))
 		as |result search|
@@ -11,6 +12,7 @@ snippet pselect-backend
 snippet pselect-multiple-backend
 	{{#power-select-multiple
 		search=(action 'search${1:name}')
+		searchEnabled=true
 		selected=${2:selectedItems}
 		onchange=(action (mut $2))
 		as |result search|
@@ -27,3 +29,43 @@ snippet pselect-static
 		}}
 		{{highlight-result result.${3:fullName} query=search}}
 	{{/power-select}}
+
+snippet xselect-replace-pselect
+	{{#power-select
+		options=${1:options}
+		searchField='$3'
+		searchEnabled=true
+		selected=${2:value}
+		allowClear=true
+		placeholder='Please select a ${4:xxx}'
+		onchange=(action (mut $2))
+		as |result search|
+		}}
+		{{highlight-result result.${3:name} query=search}}
+	{{/power-select}}
+
+snippet bstablepagination
+	{{#bs-table-pagination
+		allowQuickSearch=${2:false}
+		content=model
+		tableTitle="${1}"
+		fields=columns
+		isRemoteHandled=true
+		page=page
+		perPage=perPage
+		totalPages=totalPages
+		sorting=sortProperty
+		sortDirection=sortDirection
+		searchString=quickSearch
+
+		loading=currentlyLoading
+
+		refresh=(route-action 'refresh')
+		changePage=(route-action 'changePage')
+		changeSort=(route-action 'changeSort')
+		runQuickSearch=(route-action 'runQuickSearch')
+		changePerPage=(route-action 'changePerPage')
+		as |item|
+	 }}
+		{{bs-table-pagination.table-row item=item columns=columns linkPath=linkPath}}
+	{{/bs-table-pagination}}
