@@ -46,10 +46,10 @@ snippet xselect-replace-pselect
 
 snippet bstablepagination
 	{{#bs-table-pagination
-		allowQuickSearch=${2:false}
+		allowQuickSearch=true
 		content=model
-		tableTitle="${1}"
-		fields=columns
+		tableTitle=tableTitle
+		columns=columns
 		isRemoteHandled=true
 		page=page
 		perPage=perPage
