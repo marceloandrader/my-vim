@@ -1,6 +1,6 @@
 snippet pselect-backend
 	{{#power-select
-		search=(action 'search${1:name}')
+		search=(perform search${1:name})
 		searchEnabled=true
 		selected=${2:selectedItem}
 		onchange=(action (mut $2))

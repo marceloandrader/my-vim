@@ -1,3 +1,14 @@
 snippet th 
 	$this->${1}
 	
+
+snippet pct
+	/**
+	 * Check that client user can't load this endpoint
+	 */
+	$user = $I->login('portal_client', 'tm-portal');
+	$I->useJson();
+	$I->sendGET('${1}');
+	$I->seeResponseCodeIs(403);
+	$I->logout();
+

@@ -58,3 +58,13 @@ snippet search
 			sortField: 'last_name'
 			}).then( (items) => resolve(items) );
 	}
+
+snippet performSearch
+	search${1:Name}: task(function * (term) {
+		timeout(600)
+		return yield this.store.query('${2:client}', {
+			'name': `*${term}*`,
+			limit: 100,
+			sortField: 'name'
+		})
+	}),
