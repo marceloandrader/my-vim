@@ -1,3 +1,299 @@
+snippet scinput
+	<ScInput
+	  @type="text"
+	  @value={{${1:model}}}
+	  placeholder="${2:placeholder}"
+	/>
+
+snippet sccheckbox
+	<ScCheckbox
+	  @checked={{${1:model}}}
+	  @label={{${2:label}}}
+	  @onChange={{action (mut ${1:model})}}
+	/>
+
+snippet scradiobutton
+	<ScRadioButton
+	  @groupValue={{${1:model}}}
+	  @value={{${2:value}}}
+	  @label={{${3:label}}}
+	/>
+
+snippet scpowerselect
+	<ScPowerSelect
+	  @placeholder="Please select ${1:placeholder}"
+	  @options={{${2:list}}}
+	  @selected={{${3:selected}}}
+	  @onchange={{action (mut ${3})}}
+	  as |item|
+	>
+	  {{item.${4:display}}}
+	</ScPowerSelect>
+
+snippet sccontainer
+	<ScContainer @width="fluid" as |Row|>
+	  <Row as |Col|>
+	    <Col @size="${1:col}">
+	    </Col>
+	  </Row>
+	</ScContainer>
+
+snippet scrow
+	<Row as |Col|>
+	  <Col @size="${1:col}">
+	  </Col>
+	</Row>
+
+snippet sccol
+	<Col @size="${1:col}">
+	</Col>
+
+snippet sciconbutton
+	<ScIconButton 
+	  @icon="${1:icon}"
+	  @iconSet="fa"
+	  @onClick={{action "${2:action}"}} 
+	  @label="${3:label}"
+	  />
+
+snippet scbutton
+	<ScButton 
+	  @color="${1:color}"
+	  @onClick={{action "${2:action}"}} 
+	  @label="${3:label}"
+	  />
+
+snippet sccard
+	<ScCard as |Card|>
+	  <Card.header>
+	    ${1:header}
+	  </Card.header>
+	
+	  <Card.body>
+	    ${2:body}
+	  </Card.body>
+	
+	  <Card.footer>
+	    ${3:footer}
+	  </Card.footer>
+	</ScCard>
+
+snippet scconfirm
+	<ScConfirm
+	  @open={{${1:showConfirm}}}
+	  @onConfirm={{action (mut $1) false}}
+	  @onCancel={{action (mut $1) false}}
+	  @content="Are you sure you want to delete?"
+	  @header="Please choose an option"
+	  @size="lg"
+	  @confirmLabel="Delete"
+	/>
+
+snippet scdatepicker
+	<ScDatePicker @value={{get-date ${1:model}.date}}
+		@onSelection={{action (set-date $1 "date")}}
+		@format="MM-DD-YYYY"
+		class="form-control"
+	/>
+
+snippet scform
+	<ScForm
+	  @formLayout="vertical"
+	  @model={{this}}
+	  as |Form|
+	>
+	  <Form.element
+	    @label="Multiple Radio Buttons (passing list of default objects as options => default as in label param is 'label')"
+	    @controlType="radio"
+	    @options={{this.colorObjectOptions}}
+	    @property="checkColor"
+	    as |EL|
+	  >
+	    <EL.control/>
+	
+	    <strong>Selected (label - value):</strong> {{this.checkColor.label}} - {{this.checkColor.value}}
+	  </Form.element>
+	
+	  <Form.element
+	    @label="Multiple Radio Buttons (passing list of objects as options)"
+	    @controlType="radio"
+	    @options={{this.objectOptions}}
+	    @property="checkValue"
+	    @optionLabelPath="title"
+	    as |EL|
+	  >
+	    <EL.control/>
+	
+	    <strong>Selected (title - value):</strong> {{this.checkValue.title}} - {{this.checkValue.value}}
+	  </Form.element>
+	
+	  <Form.element
+	    @label="Multiple Radio Buttons (passing simple string options) (inline)"
+	    @controlType="radio"
+	    @options={{array 'apple' 'pear' 'strawberry'}}
+	    @property="checkFruit"
+	    as |EL|
+	  >
+	
+	    <EL.control
+	      @inline={{true}}
+	    />
+	    <strong>Value:</strong> {{this.checkFruit}}
+	  </Form.element>
+	
+	  <Form.element @label="Multiple Checkboxes">
+	    <Form.element
+	      @label="First"
+	      @controlType="checkbox"
+	      @property="checkboxValue1"
+	    />
+	
+	    <Form.element
+	      @label="Second"
+	      @controlType="checkbox"
+	      @property="checkboxValue2"
+	    />
+	  </Form.element>
+	
+	
+	  <Form.element
+	    @controlType="checkbox"
+	    @property="checkboxValue"
+	    @label="This is a checkbox"
+	  />
+	
+	  <div>
+	    <Form.element
+	      @label="ScPowerSelect"
+	      @controlType="power-select"
+	      as |EL|
+	    >
+	      <EL.control
+	        @placeholder="Choose an option..."
+	        @options={{this.options}}
+	        @value={{selectValue1}}
+	        @onChange={{action (mut selectValue1)}}
+	        as |result|
+	      >
+	        {{result}}
+	      </EL.control>
+	    </Form.element>
+	
+	    <Form.element
+	      @label="ScPowerSelect - blockless"
+	      @controlType="power-select"
+	      @placeholder="Choose an option..."
+	      @options={{this.options}}
+	      @value={{selectValue2}}
+	      @onChange={{action (mut selectValue2)}}
+	    />
+	
+	    <Form.element
+	      @label="ScPowerSelectMultiple "
+	      @controlType="power-select-multiple"
+	      @value={{selectValue3}}
+	      @onChange={{action (mut selectValue3)}}
+	      as |EL|
+	    >
+	      <EL.control
+	        @placeholder="Choose an option..."
+	        @options={{this.options}}
+	        as |result|
+	      >
+	        {{result}}
+	      </EL.control>
+	    </Form.element>
+	
+	    <Form.element
+	      @label="ScPowerSelectMultiple - blockless"
+	      @controlType="power-select-multiple"
+	      @placeholder="Choose an option..."
+	      @options={{this.options}}
+	      @value={{selectValue4}}
+	      @onChange={{action (mut selectValue4)}}
+	    />
+	  </div>
+	
+	  <div style="width: 200px">
+	    <Form.element
+	      @label="ScPowerSelect - narrow space available"
+	      @controlType="power-select"
+	      @placeholder="Choose an option..."
+	      @options={{this.stringOptions}}
+	      @value={{selectValue5}}
+	      @onChange={{action (mut selectValue5)}}
+	
+	    as |El|>
+	      <El.control @allowClear={{true}} as |result|>
+	        {{result}}
+	      </El.control>
+	    </Form.element>
+	  </div>
+	
+	
+	
+	  <Form.element
+	    @controlType="email"
+	    @label="Email"
+	    @placeholder="Email"
+	    @property="email"
+	    @required={{true}}
+	  />
+	  <Form.element
+	    @controlType="password"
+	    @label="Password"
+	    @placeholder="Password"
+	    @property="password"
+	    @required={{true}}
+	    @helpText="Minimum 6 characters"
+	  />
+	  <Form.element
+	    @controlType="checkbox"
+	    @label="Remember me"
+	    @property="rememberMe"
+	  />
+	  <Form.element
+	    @controlType="textarea"
+	    @label="Comments"
+	    @property="comments"
+	    @rows=4
+	  />
+	  <ScButton @label="Submit" @color="primary" @buttonType="submit"/>
+	</ScForm>
+
+snippet scmodal
+	<ScModal
+	  @open={{${1:showModal}}}
+	  @onHidden={{action (mut $1) false}}
+	  as |Modal|
+	>
+	  <Modal.header as |Header|>
+	    <Header.title>
+	      ${2:title}
+	    </Header.title>
+	
+	    <Header.close/>
+	  </Modal.header>
+	
+	  <Modal.body>
+		${3:body}
+	  </Modal.body>
+	
+	  <Modal.footer>
+	    <ScButton
+	      @label="Cancel"
+		  @color="secondary"
+	      @onClick={{action Modal.close}}
+	    />
+	
+	    <ScButton
+	      @label="Submit"
+	      @color="primary"
+	      @onClick={{action Modal.close}}
+	    />
+	  </Modal.footer>
+	</ScModal>
+
 snippet pselect-backend
 	{{#power-select
 		search=(perform search${1:name})
@@ -43,30 +339,3 @@ snippet xselect-replace-pselect
 		}}
 		{{highlight-result result.${3:name} query=search}}
 	{{/power-select}}
-
-snippet bstablepagination
-	{{#bs-table-pagination
-		allowQuickSearch=true
-		content=model
-		tableTitle=tableTitle
-		columns=columns
-		isRemoteHandled=true
-		page=page
-		perPage=perPage
-		totalPages=totalPages
-		numberOfRecords=totalRecords
-		sorting=sortProperty
-		sortDirection=sortDirection
-		searchString=quickSearch
-
-		loading=currentlyLoading
-
-		refresh=(route-action 'refresh')
-		changePage=(route-action 'changePage')
-		changeSort=(route-action 'changeSort')
-		runQuickSearch=(route-action 'runQuickSearch')
-		changePerPage=(route-action 'changePerPage')
-		as |item|
-	 }}
-		{{bs-table-pagination.table-row item=item columns=columns linkPath=linkPath}}
-	{{/bs-table-pagination}}
